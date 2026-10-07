@@ -1,0 +1,159 @@
+@import "tailwindcss" source(none);
+@source "../";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 6px);
+  --radius-md: calc(var(--radius) - 3px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 8px);
+  --radius-2xl: calc(var(--radius) + 16px);
+  --radius-3xl: calc(var(--radius) + 28px);
+  --radius-4xl: calc(var(--radius) + 44px);
+
+  --font-display: var(--font-fraunces), Georgia, serif;
+  --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-cream: var(--cream);
+  --color-sand: var(--sand);
+  --color-espresso: var(--espresso);
+  --color-caramel: var(--caramel);
+  --color-ember: var(--ember);
+}
+
+:root {
+  --radius: 1rem;
+
+  /* Warm café palette */
+  --cream: oklch(0.975 0.016 82);
+  --sand: oklch(0.936 0.032 79);
+  --espresso: oklch(0.256 0.045 45);
+  --caramel: oklch(0.72 0.12 65);
+  --ember: oklch(0.575 0.153 40);
+
+  --background: oklch(0.985 0.011 84);
+  --foreground: oklch(0.245 0.04 44);
+  --card: oklch(1 0.004 84);
+  --card-foreground: oklch(0.245 0.04 44);
+  --popover: oklch(1 0.004 84);
+  --popover-foreground: oklch(0.245 0.04 44);
+  --primary: oklch(0.325 0.06 42);
+  --primary-foreground: oklch(0.975 0.016 82);
+  --secondary: oklch(0.936 0.032 79);
+  --secondary-foreground: oklch(0.29 0.05 44);
+  --muted: oklch(0.945 0.023 80);
+  --muted-foreground: oklch(0.505 0.045 52);
+  --accent: oklch(0.575 0.153 40);
+  --accent-foreground: oklch(0.985 0.011 84);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.985 0.011 84);
+  --border: oklch(0.895 0.028 78);
+  --input: oklch(0.895 0.028 78);
+  --ring: oklch(0.575 0.153 40);
+
+  --gradient-hero: radial-gradient(
+    120% 90% at 78% 32%,
+    oklch(0.955 0.045 72) 0%,
+    oklch(0.985 0.011 84) 62%
+  );
+  --gradient-ember: linear-gradient(135deg, var(--ember), oklch(0.66 0.14 55));
+  --shadow-soft: 0 2px 8px -4px oklch(0.3 0.05 45 / 0.12), 0 18px 40px -22px oklch(0.3 0.05 45 / 0.28);
+  --shadow-lift: 0 8px 20px -8px oklch(0.3 0.05 45 / 0.18), 0 40px 70px -30px oklch(0.3 0.05 45 / 0.34);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  ::selection {
+    background: var(--ember);
+    color: var(--cream);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 3px;
+  }
+}
+
+@utility surface-hero {
+  background-image: var(--gradient-hero);
+}
+
+@utility btn-ember {
+  background-image: var(--gradient-ember);
+  color: var(--cream);
+  box-shadow: var(--shadow-soft);
+}
+
+@utility shadow-soft {
+  box-shadow: var(--shadow-soft);
+}
+
+@utility shadow-lift {
+  box-shadow: var(--shadow-lift);
+}
+
+@utility eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--muted-foreground);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
