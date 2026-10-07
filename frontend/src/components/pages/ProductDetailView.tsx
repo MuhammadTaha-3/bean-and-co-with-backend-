@@ -20,7 +20,7 @@ const sizes = [
 ] as const;
 
 export function ProductDetailView({ id }: { id: string }) {
-    const [product, setProduct] = useState<Product | null | undefined>(undefined);
+  const [product, setProduct] = useState<Product | null | undefined>(undefined);
   const [size, setSize] = useState<(typeof sizes)[number]>(sizes[1]);
   const [qty, setQty] = useState(1);
   const { products } = useCatalog();
@@ -52,7 +52,10 @@ export function ProductDetailView({ id }: { id: string }) {
       <div className="mx-auto max-w-md px-4 py-24 text-center">
         <h1 className="text-4xl">Product not found</h1>
         <p className="mt-3 text-muted-foreground">That item may have been removed from the menu.</p>
-        <Link href="/products" className="btn-ember mt-8 inline-block rounded-full px-7 py-3.5 text-sm font-semibold">
+        <Link
+          href="/products"
+          className="btn-ember mt-8 inline-block rounded-full px-7 py-3.5 text-sm font-semibold"
+        >
           Back to shop
         </Link>
       </div>
@@ -63,11 +66,16 @@ export function ProductDetailView({ id }: { id: string }) {
   const unit = isBeans ? product.price : Math.round(product.price * size.mult);
   const soldOut = product.stock <= 0;
   const saved = wishlist.has(product.id);
-  const related = (products ?? []).filter((p) => p.category === product.category && p.id !== product.id).slice(0, 4);
+  const related = (products ?? [])
+    .filter((p) => p.category === product.category && p.id !== product.id)
+    .slice(0, 4);
 
   return (
     <div className="mx-auto max-w-6xl px-4 pb-24 sm:px-6">
-      <Link href="/products" className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-accent">
+      <Link
+        href="/products"
+        className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-accent"
+      >
         <ArrowLeft className="size-4" /> All products
       </Link>
 
@@ -91,7 +99,12 @@ export function ProductDetailView({ id }: { id: string }) {
           />
         </motion.div>
 
-        <motion.div initial="hidden" animate="show" variants={{ show: { transition: { staggerChildren: 0.08 } } }} className="flex flex-col">
+        <motion.div
+          initial="hidden"
+          animate="show"
+          variants={{ show: { transition: { staggerChildren: 0.08 } } }}
+          className="flex flex-col"
+        >
           {[
             <div key="a" className="flex items-center gap-3">
               <p className="eyebrow">
@@ -100,18 +113,32 @@ export function ProductDetailView({ id }: { id: string }) {
               </p>
               <StockBadge stock={product.stock} />
             </div>,
-            <h1 key="b" className="mt-3 text-4xl leading-tight sm:text-5xl">{product.name}</h1>,
-            <p key="c" className="mt-2 text-sm font-medium text-accent">{product.notes}</p>,
-            <p key="d" className="mt-5 max-w-md leading-relaxed text-muted-foreground">{product.description}</p>,
+            <h1 key="b" className="mt-3 text-4xl leading-tight sm:text-5xl">
+              {product.name}
+            </h1>,
+            <p key="c" className="mt-2 text-sm font-medium text-accent">
+              {product.notes}
+            </p>,
+            <p key="d" className="mt-5 max-w-md leading-relaxed text-muted-foreground">
+              {product.description}
+            </p>,
           ].map((n, i) => (
-            <motion.div key={i} variants={{ hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0 } }}>
+            <motion.div
+              key={i}
+              variants={{ hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0 } }}
+            >
               {n}
             </motion.div>
           ))}
 
           {!isBeans && (
-            <motion.div variants={{ hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0 } }} className="mt-7">
-              <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Size</p>
+            <motion.div
+              variants={{ hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0 } }}
+              className="mt-7"
+            >
+              <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+                Size
+              </p>
               <div className="mt-2 flex gap-2">
                 {sizes.map((s) => (
                   <motion.button
@@ -121,7 +148,11 @@ export function ProductDetailView({ id }: { id: string }) {
                     className={`relative rounded-full px-5 py-2.5 text-sm font-semibold transition-colors ${size.label === s.label ? "text-primary-foreground" : "border border-border text-foreground/70"}`}
                   >
                     {size.label === s.label && (
-                      <motion.span layoutId="detail-size" className="absolute inset-0 rounded-full bg-primary" transition={{ type: "spring", stiffness: 380, damping: 30 }} />
+                      <motion.span
+                        layoutId="detail-size"
+                        className="absolute inset-0 rounded-full bg-primary"
+                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                      />
                     )}
                     <span className="relative z-10">{s.label}</span>
                   </motion.button>
@@ -130,14 +161,29 @@ export function ProductDetailView({ id }: { id: string }) {
             </motion.div>
           )}
 
-          <motion.div variants={{ hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0 } }} className="mt-7 flex items-center gap-5">
-            <QtyStepper label={product.name} value={qty} min={1} max={Math.max(1, Math.min(9, product.stock))} onInc={() => setQty((q) => q + 1)} onDec={() => setQty((q) => q - 1)} />
+          <motion.div
+            variants={{ hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0 } }}
+            className="mt-7 flex items-center gap-5"
+          >
+            <QtyStepper
+              label={product.name}
+              value={qty}
+              min={1}
+              max={Math.max(1, Math.min(9, product.stock))}
+              onInc={() => setQty((q) => q + 1)}
+              onDec={() => setQty((q) => q - 1)}
+            />
             <AnimatedPrice value={unit * qty} className="font-display text-3xl" />
           </motion.div>
 
-          <motion.div variants={{ hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0 } }} className="mt-8 flex gap-3">
+          <motion.div
+            variants={{ hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0 } }}
+            className="mt-8 flex gap-3"
+          >
             <motion.button
-              onClick={() => addToCart(product, { qty, ...(isBeans ? {} : { size: size.label }), price: unit })}
+              onClick={() =>
+                addToCart(product, { qty, ...(isBeans ? {} : { size: size.label }), price: unit })
+              }
               disabled={soldOut}
               whileHover={soldOut ? {} : { scale: 1.02, y: -2 }}
               whileTap={{ scale: 0.97 }}

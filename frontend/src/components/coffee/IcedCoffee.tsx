@@ -25,7 +25,7 @@ export function IcedCoffee({
           key={i}
           aria-hidden="true"
           className="absolute text-cream/10"
-          style={{ left: `${8 + i * 16}%`, top: `${(i * 37) % 80 + 5}%` }}
+          style={{ left: `${8 + i * 16}%`, top: `${((i * 37) % 80) + 5}%` }}
           animate={{ y: [0, -18, 0], rotate: [0, 180, 360], opacity: [0.08, 0.2, 0.08] }}
           transition={{ duration: 10 + i * 2, repeat: Infinity, ease: "easeInOut", delay: i * 0.8 }}
         >

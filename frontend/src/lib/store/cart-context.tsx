@@ -102,7 +102,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
       if (found) {
         return prev.map((l) =>
           keyOf(l) === key
-            ? { ...l, stock: stock ?? l.stock, qty: cap({ ...l, stock: stock ?? l.stock }, l.qty + qty) }
+            ? {
+                ...l,
+                stock: stock ?? l.stock,
+                qty: cap({ ...l, stock: stock ?? l.stock }, l.qty + qty),
+              }
             : l,
         );
       }
@@ -181,7 +185,21 @@ export function CartProvider({ children }: { children: ReactNode }) {
       decrement,
       clear,
     };
-  }, [lines, hydrated, promo, open, deliveryBase, applyPromo, clearPromo, add, remove, setQty, increment, decrement, clear]);
+  }, [
+    lines,
+    hydrated,
+    promo,
+    open,
+    deliveryBase,
+    applyPromo,
+    clearPromo,
+    add,
+    remove,
+    setQty,
+    increment,
+    decrement,
+    clear,
+  ]);
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }

@@ -37,13 +37,26 @@ export function CartView() {
 
   if (cart.lines.length === 0) {
     return (
-      <motion.section initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="mx-auto max-w-md px-4 py-20 text-center">
-        <motion.div animate={{ y: [0, -8, 0] }} transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }} className="mx-auto grid size-24 place-items-center rounded-full bg-secondary">
+      <motion.section
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="mx-auto max-w-md px-4 py-20 text-center"
+      >
+        <motion.div
+          animate={{ y: [0, -8, 0] }}
+          transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+          className="mx-auto grid size-24 place-items-center rounded-full bg-secondary"
+        >
           <ShoppingBag className="size-10 text-accent" />
         </motion.div>
         <h1 className="mt-8 text-4xl">Your cart is empty</h1>
-        <p className="mt-3 text-muted-foreground">Nothing brewing yet. Pick something warm from the menu.</p>
-        <Link href="/products" className="btn-ember mt-8 inline-flex items-center gap-2 rounded-full px-8 py-4 text-sm font-semibold">
+        <p className="mt-3 text-muted-foreground">
+          Nothing brewing yet. Pick something warm from the menu.
+        </p>
+        <Link
+          href="/products"
+          className="btn-ember mt-8 inline-flex items-center gap-2 rounded-full px-8 py-4 text-sm font-semibold"
+        >
           Browse the shop <ArrowRight className="size-4" />
         </Link>
       </motion.section>
@@ -84,13 +97,26 @@ export function CartView() {
                     transition={{ type: "spring", stiffness: 300, damping: 28 }}
                     className="mb-3 flex gap-3 rounded-3xl border border-border/60 bg-card p-3 shadow-soft sm:mb-4 sm:gap-4 sm:p-4"
                   >
-                    <Link href={`/products/${l.productId}`} className="shrink-0 overflow-hidden rounded-2xl">
-                      <motion.img whileHover={{ scale: 1.1 }} src={l.image} alt={l.name} width={768} height={880} className="size-20 object-cover sm:size-28" />
+                    <Link
+                      href={`/products/${l.productId}`}
+                      className="shrink-0 overflow-hidden rounded-2xl"
+                    >
+                      <motion.img
+                        whileHover={{ scale: 1.1 }}
+                        src={l.image}
+                        alt={l.name}
+                        width={768}
+                        height={880}
+                        className="size-20 object-cover sm:size-28"
+                      />
                     </Link>
                     <div className="flex min-w-0 flex-1 flex-col">
                       <div className="flex items-start justify-between gap-3">
                         <div className="min-w-0">
-                          <Link href={`/products/${l.productId}`} className="block truncate font-display text-base font-semibold sm:text-lg">
+                          <Link
+                            href={`/products/${l.productId}`}
+                            className="block truncate font-display text-base font-semibold sm:text-lg"
+                          >
                             {l.name}
                           </Link>
                           <p className="text-sm text-muted-foreground">
@@ -109,11 +135,19 @@ export function CartView() {
                         </motion.button>
                       </div>
                       <div className="mt-auto flex flex-wrap items-center justify-between gap-2 pt-3 sm:pt-4">
-                        <QtyStepper label={l.name} value={l.qty} max={l.stock ?? 99} onInc={() => cart.increment(key)} onDec={() => cart.decrement(key)} />
+                        <QtyStepper
+                          label={l.name}
+                          value={l.qty}
+                          max={l.stock ?? 99}
+                          onInc={() => cart.increment(key)}
+                          onDec={() => cart.decrement(key)}
+                        />
                         <AnimatedPrice value={l.price * l.qty} className="font-display text-lg" />
                       </div>
                       {l.stock !== undefined && l.qty >= l.stock && (
-                        <p className="mt-2 text-xs font-medium text-accent">Maximum available quantity reached</p>
+                        <p className="mt-2 text-xs font-medium text-accent">
+                          Maximum available quantity reached
+                        </p>
                       )}
                     </div>
                   </motion.li>
@@ -122,7 +156,10 @@ export function CartView() {
             </AnimatePresence>
           </ul>
 
-          <Link href="/products" className="mt-2 inline-block text-sm font-semibold text-accent underline-offset-4 hover:underline">
+          <Link
+            href="/products"
+            className="mt-2 inline-block text-sm font-semibold text-accent underline-offset-4 hover:underline"
+          >
             ← Continue shopping
           </Link>
 
@@ -139,8 +176,17 @@ export function CartView() {
                     transition={{ delay: i * 0.08, ease: easeOut }}
                     className="rounded-2xl border border-border/60 bg-card p-2 sm:rounded-3xl sm:p-3"
                   >
-                    <img src={p.image} alt={p.name} loading="lazy" width={768} height={880} className="aspect-square w-full rounded-2xl object-cover" />
-                    <p className="mt-2 truncate text-xs font-semibold sm:mt-3 sm:text-sm">{p.name}</p>
+                    <img
+                      src={p.image}
+                      alt={p.name}
+                      loading="lazy"
+                      width={768}
+                      height={880}
+                      className="aspect-square w-full rounded-2xl object-cover"
+                    />
+                    <p className="mt-2 truncate text-xs font-semibold sm:mt-3 sm:text-sm">
+                      {p.name}
+                    </p>
                     <div className="mt-1 flex flex-col items-start gap-1.5 sm:flex-row sm:items-center sm:justify-between">
                       <span className="text-sm text-muted-foreground">{formatPrice(p.price)}</span>
                       <motion.button
@@ -168,9 +214,14 @@ export function CartView() {
           {cart.promo ? (
             <div className="flex items-center justify-between rounded-2xl bg-secondary px-4 py-3 text-sm">
               <span className="flex items-center gap-2 font-medium">
-                <BadgePercent className="size-4 text-accent" /> {cart.promo} · {PROMOS[cart.promo]?.label}
+                <BadgePercent className="size-4 text-accent" /> {cart.promo} ·{" "}
+                {PROMOS[cart.promo]?.label}
               </span>
-              <button onClick={cart.clearPromo} aria-label="Remove promo code" className="text-muted-foreground hover:text-destructive">
+              <button
+                onClick={cart.clearPromo}
+                aria-label="Remove promo code"
+                className="text-muted-foreground hover:text-destructive"
+              >
                 <X className="size-4" />
               </button>
             </div>
@@ -188,23 +239,37 @@ export function CartView() {
                   aria-invalid={!!codeError}
                   className={inputClass}
                 />
-                <button className="rounded-2xl bg-primary px-5 text-sm font-semibold text-primary-foreground">Apply</button>
+                <button className="rounded-2xl bg-primary px-5 text-sm font-semibold text-primary-foreground">
+                  Apply
+                </button>
               </div>
-              {codeError && <p role="alert" className="mt-1.5 text-xs font-medium text-destructive">{codeError}</p>}
+              {codeError && (
+                <p role="alert" className="mt-1.5 text-xs font-medium text-destructive">
+                  {codeError}
+                </p>
+              )}
             </form>
           )}
 
           <dl className="space-y-2.5 border-t border-border pt-4 text-sm">
             <Row label="Subtotal" value={formatPrice(cart.subtotal)} />
-            {cart.discount > 0 && <Row label="Discount" value={`− ${formatPrice(cart.discount)}`} />}
-            <Row label="Delivery" value={cart.deliveryFee === 0 ? "Free" : formatPrice(cart.deliveryFee)} />
+            {cart.discount > 0 && (
+              <Row label="Discount" value={`− ${formatPrice(cart.discount)}`} />
+            )}
+            <Row
+              label="Delivery"
+              value={cart.deliveryFee === 0 ? "Free" : formatPrice(cart.deliveryFee)}
+            />
           </dl>
           <div className="flex items-baseline justify-between border-t border-border pt-4">
             <span className="font-medium">Total</span>
             <AnimatedPrice value={cart.total} className="font-display text-3xl" />
           </div>
           <motion.div whileHover={{ scale: 1.02, y: -2 }} whileTap={{ scale: 0.98 }}>
-            <Link href="/checkout" className="btn-ember flex items-center justify-center gap-2 rounded-full py-4 text-sm font-semibold">
+            <Link
+              href="/checkout"
+              className="btn-ember flex items-center justify-center gap-2 rounded-full py-4 text-sm font-semibold"
+            >
               Proceed to checkout <ArrowRight className="size-4" />
             </Link>
           </motion.div>
@@ -218,7 +283,10 @@ export function CartView() {
             <p className="text-xs text-muted-foreground">Total</p>
             <AnimatedPrice value={cart.total} className="font-display text-xl" />
           </div>
-          <Link href="/checkout" className="btn-ember ml-auto max-w-[14rem] flex-1 rounded-full py-3.5 text-center text-sm font-semibold">
+          <Link
+            href="/checkout"
+            className="btn-ember ml-auto max-w-[14rem] flex-1 rounded-full py-3.5 text-center text-sm font-semibold"
+          >
             Checkout
           </Link>
         </div>

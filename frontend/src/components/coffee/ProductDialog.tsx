@@ -164,7 +164,12 @@ export function ProductDialog({
                     >
                       <Minus className="size-3.5" />
                     </motion.button>
-                    <motion.span key={qty} initial={{ scale: 0.7, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="w-7 text-center text-sm font-semibold">
+                    <motion.span
+                      key={qty}
+                      initial={{ scale: 0.7, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      className="w-7 text-center text-sm font-semibold"
+                    >
                       {qty}
                     </motion.span>
                     <motion.button

@@ -17,7 +17,13 @@ export function StockBadge({ stock, threshold = 10 }: { stock: number; threshold
     "out-of-stock": ["Sold out", "bg-destructive/10 text-destructive"],
   } as const;
   const [label, cls] = map[s];
-  return <span className={`rounded-full px-2 py-0.5 text-[10px] sm:px-3 sm:py-1 sm:text-[11px] font-semibold ${cls}`}>{label}</span>;
+  return (
+    <span
+      className={`rounded-full px-2 py-0.5 text-[10px] sm:px-3 sm:py-1 sm:text-[11px] font-semibold ${cls}`}
+    >
+      {label}
+    </span>
+  );
 }
 
 export function ProductCard({ product: p }: { product: Product }) {
@@ -52,8 +58,15 @@ export function ProductCard({ product: p }: { product: Product }) {
           aria-pressed={saved}
           className="absolute right-2 top-2 grid size-8 sm:right-3 sm:top-3 sm:size-9 place-items-center rounded-full bg-card/90 shadow-soft backdrop-blur"
         >
-          <motion.span key={String(saved)} initial={{ scale: 0.5 }} animate={{ scale: 1 }} transition={{ type: "spring", stiffness: 500, damping: 14 }}>
-            <Heart className={`size-4 ${saved ? "fill-accent text-accent" : "text-foreground/70"}`} />
+          <motion.span
+            key={String(saved)}
+            initial={{ scale: 0.5 }}
+            animate={{ scale: 1 }}
+            transition={{ type: "spring", stiffness: 500, damping: 14 }}
+          >
+            <Heart
+              className={`size-4 ${saved ? "fill-accent text-accent" : "text-foreground/70"}`}
+            />
           </motion.span>
         </motion.button>
         <span className="absolute left-2 top-2 sm:left-3 sm:top-3">
@@ -63,12 +76,19 @@ export function ProductCard({ product: p }: { product: Product }) {
 
       <div className="flex flex-1 flex-col px-1.5 pb-1.5 pt-3 sm:px-3 sm:pb-3 sm:pt-5">
         <p className="eyebrow">{p.category}</p>
-        <Link href={`/products/${p.id}`} className="mt-1 line-clamp-2 font-display text-base font-semibold leading-snug text-foreground sm:mt-1.5 sm:text-xl">
+        <Link
+          href={`/products/${p.id}`}
+          className="mt-1 line-clamp-2 font-display text-base font-semibold leading-snug text-foreground sm:mt-1.5 sm:text-xl"
+        >
           {p.name}
         </Link>
-        <p className="mt-1 line-clamp-1 text-xs text-muted-foreground sm:text-sm">{p.notes ?? p.description}</p>
+        <p className="mt-1 line-clamp-1 text-xs text-muted-foreground sm:text-sm">
+          {p.notes ?? p.description}
+        </p>
         <div className="mt-3 flex items-center justify-between gap-2 sm:mt-5">
-          <span className="font-display text-base text-foreground sm:text-lg">{formatPrice(p.price)}</span>
+          <span className="font-display text-base text-foreground sm:text-lg">
+            {formatPrice(p.price)}
+          </span>
           <motion.button
             onClick={() => addToCart(p)}
             disabled={soldOut}

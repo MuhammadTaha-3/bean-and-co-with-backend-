@@ -97,7 +97,9 @@ export function MenuSection({
                   <div className="flex min-w-0 flex-1 flex-col">
                     <p className="eyebrow">{p.category}</p>
                     <h3 className="mt-1 truncate text-lg text-foreground">{p.name}</h3>
-                    <p className="mt-0.5 truncate text-sm text-muted-foreground">{p.notes ?? p.description}</p>
+                    <p className="mt-0.5 truncate text-sm text-muted-foreground">
+                      {p.notes ?? p.description}
+                    </p>
                     <div className="mt-auto flex items-center justify-between pt-4">
                       <span className="font-display text-base text-foreground">
                         {formatPrice(p.price)}

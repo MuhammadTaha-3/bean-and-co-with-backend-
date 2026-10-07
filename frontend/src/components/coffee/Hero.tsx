@@ -27,20 +27,34 @@ export function Hero({
   const cupScale = useTransform(scrollYProgress, [0, 1], [1, reduce ? 1 : 1.08]);
 
   return (
-    <section id="home" ref={ref} className="surface-hero relative overflow-hidden pb-16 pt-32 sm:pt-36 lg:pb-24 lg:pt-40">
+    <section
+      id="home"
+      ref={ref}
+      className="surface-hero relative overflow-hidden pb-16 pt-32 sm:pt-36 lg:pb-24 lg:pt-40"
+    >
       <FloatingBeans />
 
       <div className="relative mx-auto grid max-w-6xl gap-12 px-4 sm:px-6 lg:grid-cols-[1fr_1.05fr] lg:items-center lg:gap-6">
-        <motion.div initial="hidden" animate="show" variants={{ show: { transition: { staggerChildren: 0.09 } } }}>
+        <motion.div
+          initial="hidden"
+          animate="show"
+          variants={{ show: { transition: { staggerChildren: 0.09 } } }}
+        >
           <motion.p
-            variants={{ hidden: { opacity: 0, y: 18 }, show: { opacity: 1, y: 0, transition: { duration: 0.6, ease } } }}
+            variants={{
+              hidden: { opacity: 0, y: 18 },
+              show: { opacity: 1, y: 0, transition: { duration: 0.6, ease } },
+            }}
             className="eyebrow"
           >
             Small-batch roastery · Est. 1978
           </motion.p>
 
           <motion.h1
-            variants={{ hidden: { opacity: 0, y: 26 }, show: { opacity: 1, y: 0, transition: { duration: 0.85, ease } } }}
+            variants={{
+              hidden: { opacity: 0, y: 26 },
+              show: { opacity: 1, y: 0, transition: { duration: 0.85, ease } },
+            }}
             className="mt-4 text-5xl leading-[0.98] text-foreground sm:text-6xl lg:text-7xl"
           >
             Awaken Your
@@ -48,7 +62,10 @@ export function Hero({
           </motion.h1>
 
           <motion.p
-            variants={{ hidden: { opacity: 0, y: 22 }, show: { opacity: 1, y: 0, transition: { duration: 0.75, ease } } }}
+            variants={{
+              hidden: { opacity: 0, y: 22 },
+              show: { opacity: 1, y: 0, transition: { duration: 0.75, ease } },
+            }}
             className="mt-5 max-w-md text-lg leading-relaxed text-muted-foreground"
           >
             Because life is too short for bland coffee. Our brews are an invitation to taste, to
@@ -56,7 +73,10 @@ export function Hero({
           </motion.p>
 
           <motion.div
-            variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0, transition: { duration: 0.7, ease } } }}
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              show: { opacity: 1, y: 0, transition: { duration: 0.7, ease } },
+            }}
             className="mt-8 flex flex-wrap items-center gap-3"
           >
             <motion.a
@@ -81,7 +101,10 @@ export function Hero({
           </motion.div>
 
           <motion.div
-            variants={{ hidden: { opacity: 0, y: 18 }, show: { opacity: 1, y: 0, transition: { duration: 0.7, ease } } }}
+            variants={{
+              hidden: { opacity: 0, y: 18 },
+              show: { opacity: 1, y: 0, transition: { duration: 0.7, ease } },
+            }}
             className="mt-9 flex items-center gap-4"
           >
             <div className="flex -space-x-3">
@@ -115,7 +138,11 @@ export function Hero({
           <motion.div
             aria-hidden="true"
             className="absolute inset-0 rounded-[50%] bg-sand/70 blur-2xl"
-            animate={reduce ? { scale: 1, opacity: 0.6 } : { scale: [1, 1.06, 1], opacity: [0.55, 0.8, 0.55] }}
+            animate={
+              reduce
+                ? { scale: 1, opacity: 0.6 }
+                : { scale: [1, 1.06, 1], opacity: [0.55, 0.8, 0.55] }
+            }
             transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
           />
           <motion.div style={{ y: splashY }} className="absolute -inset-[18%]" aria-hidden="true">
@@ -132,8 +159,12 @@ export function Hero({
               }
               transition={{
                 opacity: { duration: 1.3, ease, delay: 0.15 },
-                scale: reduce ? { duration: 1.3, ease, delay: 0.15 } : { duration: 16, repeat: Infinity, ease: "easeInOut" },
-                rotate: reduce ? { duration: 1.3, ease, delay: 0.15 } : { duration: 22, repeat: Infinity, ease: "easeInOut" },
+                scale: reduce
+                  ? { duration: 1.3, ease, delay: 0.15 }
+                  : { duration: 16, repeat: Infinity, ease: "easeInOut" },
+                rotate: reduce
+                  ? { duration: 1.3, ease, delay: 0.15 }
+                  : { duration: 22, repeat: Infinity, ease: "easeInOut" },
               }}
               className="h-full w-full object-contain will-change-transform"
             />
@@ -173,7 +204,10 @@ export function Hero({
           {bestSellers.map((p) => (
             <motion.li
               key={p.id}
-              variants={{ hidden: { opacity: 0, y: 26 }, show: { opacity: 1, y: 0, transition: { duration: 0.7, ease } } }}
+              variants={{
+                hidden: { opacity: 0, y: 26 },
+                show: { opacity: 1, y: 0, transition: { duration: 0.7, ease } },
+              }}
             >
               <motion.button
                 onClick={() => onSelect(p)}

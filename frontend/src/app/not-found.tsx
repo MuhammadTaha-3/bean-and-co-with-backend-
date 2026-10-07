@@ -9,7 +9,10 @@ export default function NotFound() {
         <p className="mt-2 text-sm text-muted-foreground">
           The page you&apos;re looking for doesn&apos;t exist or has been moved.
         </p>
-        <Link href="/" className="btn-ember mt-6 inline-flex rounded-full px-6 py-3 text-sm font-semibold">
+        <Link
+          href="/"
+          className="btn-ember mt-6 inline-flex rounded-full px-6 py-3 text-sm font-semibold"
+        >
           Go home
         </Link>
       </div>

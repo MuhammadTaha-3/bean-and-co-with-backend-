@@ -19,7 +19,10 @@ export function Story() {
 
   return (
     <section id="story" className="py-24 lg:py-32">
-      <div ref={ref} className="mx-auto grid max-w-6xl gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:items-center">
+      <div
+        ref={ref}
+        className="mx-auto grid max-w-6xl gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:items-center"
+      >
         <Reveal>
           <div className="relative overflow-hidden rounded-4xl shadow-lift">
             <motion.img
@@ -53,8 +56,8 @@ export function Story() {
           />
           <Reveal delay={0.1}>
             <p className="mt-4 text-base leading-relaxed text-muted-foreground">
-              Everything is built around slowness: longer fermentation, gentler roast curves,
-              milk textured to order. The result is coffee that tastes like a place, not a formula.
+              Everything is built around slowness: longer fermentation, gentler roast curves, milk
+              textured to order. The result is coffee that tastes like a place, not a formula.
             </p>
           </Reveal>
 

@@ -17,7 +17,10 @@ export function ProductsView() {
   const [cat, setCat] = useState("All");
   const [sort, setSort] = useState<Sort>("featured");
 
-  const cats = useMemo(() => ["All", ...new Set((products ?? []).map((p) => p.category))], [products]);
+  const cats = useMemo(
+    () => ["All", ...new Set((products ?? []).map((p) => p.category))],
+    [products],
+  );
 
   const visible = useMemo(() => {
     const term = q.trim().toLowerCase();
@@ -36,7 +39,11 @@ export function ProductsView() {
 
   return (
     <section className="mx-auto max-w-6xl px-4 pb-24 sm:px-6">
-      <SectionHeading eyebrow="The shop" title="Everything we pour, bake and roast" copy="Search the full range, filter by category and sort by price." />
+      <SectionHeading
+        eyebrow="The shop"
+        title="Everything we pour, bake and roast"
+        copy="Search the full range, filter by category and sort by price."
+      />
 
       <div className="mt-10 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
         <div className="relative w-full lg:max-w-sm">
@@ -77,7 +84,11 @@ export function ProductsView() {
         </select>
       </div>
 
-      <div role="tablist" aria-label="Categories" className="-mx-4 mt-5 flex gap-2 overflow-x-auto px-4 pb-1 [scrollbar-width:none] sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0">
+      <div
+        role="tablist"
+        aria-label="Categories"
+        className="-mx-4 mt-5 flex gap-2 overflow-x-auto px-4 pb-1 [scrollbar-width:none] sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0"
+      >
         {cats.map((c) => (
           <motion.button
             key={c}
@@ -90,7 +101,11 @@ export function ProductsView() {
             }`}
           >
             {cat === c && (
-              <motion.span layoutId="shop-pill" transition={{ type: "spring", stiffness: 380, damping: 30 }} className="absolute inset-0 rounded-full bg-primary" />
+              <motion.span
+                layoutId="shop-pill"
+                transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                className="absolute inset-0 rounded-full bg-primary"
+              />
             )}
             <span className="relative z-10">{c}</span>
           </motion.button>
@@ -126,11 +141,24 @@ export function ProductsView() {
           ))}
         </div>
       ) : visible.length === 0 ? (
-        <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ ease: easeOut }} className="mt-10 grid place-items-center rounded-4xl border border-dashed border-border py-20 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ ease: easeOut }}
+          className="mt-10 grid place-items-center rounded-4xl border border-dashed border-border py-20 text-center"
+        >
           <PackageOpen className="size-10 text-accent" />
           <p className="mt-4 font-display text-xl">Nothing matches that</p>
-          <p className="mt-1 text-sm text-muted-foreground">Try a different word or clear the filters.</p>
-          <button onClick={() => { setQ(""); setCat("All"); }} className="btn-ember mt-6 rounded-full px-6 py-3 text-sm font-semibold">
+          <p className="mt-1 text-sm text-muted-foreground">
+            Try a different word or clear the filters.
+          </p>
+          <button
+            onClick={() => {
+              setQ("");
+              setCat("All");
+            }}
+            className="btn-ember mt-6 rounded-full px-6 py-3 text-sm font-semibold"
+          >
             Reset filters
           </button>
         </motion.div>

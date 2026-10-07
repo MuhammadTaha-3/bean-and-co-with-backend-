@@ -57,14 +57,20 @@ export function useAddToCart() {
         return false;
       }
       const inCart = cart.lines
-        .filter((l) => l.productId === product.id && keyOf(l) !== keyOf({ productId: product.id, size: opts.size }))
+        .filter(
+          (l) =>
+            l.productId === product.id &&
+            keyOf(l) !== keyOf({ productId: product.id, size: opts.size }),
+        )
         .reduce((n, l) => n + l.qty, 0);
       const room = stock === null ? 99 : stock - inCart;
       if (room <= 0) {
         toast.error(`You already have all ${stock} in your cart`);
         return false;
       }
-      const same = cart.lines.find((l) => keyOf(l) === keyOf({ productId: product.id, size: opts.size }));
+      const same = cart.lines.find(
+        (l) => keyOf(l) === keyOf({ productId: product.id, size: opts.size }),
+      );
       if (stock !== null && same && same.qty >= room) {
         toast.message(`Only ${stock} of ${product.name} in stock`);
         return false;

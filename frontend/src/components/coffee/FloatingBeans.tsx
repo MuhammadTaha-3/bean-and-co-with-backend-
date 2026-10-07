@@ -58,7 +58,9 @@ export function Steam({ className = "" }: { className?: string }) {
           key={i}
           className="block h-24 w-[6px] rounded-full bg-gradient-to-t from-transparent via-foreground/15 to-transparent blur-[2px]"
           animate={
-            reduce ? { opacity: 0 } : { y: [10, -34], opacity: [0, 0.85, 0], scaleX: [0.7, 1.5, 0.7] }
+            reduce
+              ? { opacity: 0 }
+              : { y: [10, -34], opacity: [0, 0.85, 0], scaleX: [0.7, 1.5, 0.7] }
           }
           transition={{ duration: 4.2, delay: i * 0.7, repeat: Infinity, ease: "easeInOut" }}
         />

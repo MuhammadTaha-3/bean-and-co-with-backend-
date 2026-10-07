@@ -36,7 +36,11 @@ export function CartDrawer() {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
-          <button aria-label="Close cart" onClick={close} className="absolute inset-0 bg-espresso/50 backdrop-blur-sm" />
+          <button
+            aria-label="Close cart"
+            onClick={close}
+            className="absolute inset-0 bg-espresso/50 backdrop-blur-sm"
+          />
           <motion.aside
             role="dialog"
             aria-modal="true"
@@ -114,7 +118,14 @@ export function CartDrawer() {
                         transition={{ type: "spring", stiffness: 300, damping: 28 }}
                         className="mb-4 flex items-center gap-3 rounded-3xl border border-border/60 p-3"
                       >
-                        <img src={l.image} alt={l.name} loading="lazy" width={768} height={880} className="size-16 shrink-0 rounded-2xl object-cover" />
+                        <img
+                          src={l.image}
+                          alt={l.name}
+                          loading="lazy"
+                          width={768}
+                          height={880}
+                          className="size-16 shrink-0 rounded-2xl object-cover"
+                        />
                         <div className="min-w-0 flex-1">
                           <p className="truncate text-sm font-semibold">{l.name}</p>
                           <p className="text-xs text-muted-foreground">
@@ -130,7 +141,9 @@ export function CartDrawer() {
                               onInc={() => cart.increment(key)}
                               onDec={() => cart.decrement(key)}
                             />
-                            <span className="text-sm font-semibold">{formatPrice(l.price * l.qty)}</span>
+                            <span className="text-sm font-semibold">
+                              {formatPrice(l.price * l.qty)}
+                            </span>
                           </div>
                         </div>
                         <motion.button
@@ -167,9 +180,14 @@ export function CartDrawer() {
                     )}
                     <div className="flex items-center justify-between">
                       <span className="text-sm text-muted-foreground">Subtotal</span>
-                      <AnimatedPrice value={cart.subtotal - cart.discount} className="font-display text-2xl" />
+                      <AnimatedPrice
+                        value={cart.subtotal - cart.discount}
+                        className="font-display text-2xl"
+                      />
                     </div>
-                    <p className="mt-1 text-xs text-muted-foreground">Delivery calculated at checkout.</p>
+                    <p className="mt-1 text-xs text-muted-foreground">
+                      Delivery calculated at checkout.
+                    </p>
                     <div className="mt-4 grid grid-cols-[1fr_1.4fr] gap-2">
                       <Link
                         href="/cart"
@@ -179,7 +197,11 @@ export function CartDrawer() {
                         View cart
                       </Link>
                       <motion.div whileHover={{ scale: 1.02, y: -2 }} whileTap={{ scale: 0.97 }}>
-                        <Link href="/checkout" onClick={close} className="btn-ember block rounded-full py-3.5 text-center text-sm font-semibold">
+                        <Link
+                          href="/checkout"
+                          onClick={close}
+                          className="btn-ember block rounded-full py-3.5 text-center text-sm font-semibold"
+                        >
                           Checkout
                         </Link>
                       </motion.div>

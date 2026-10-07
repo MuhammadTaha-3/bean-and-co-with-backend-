@@ -7,7 +7,10 @@ import { SectionHeading, easeOut } from "./motion-primitives";
 
 export function Reviews() {
   return (
-    <section id="reviews" className="relative overflow-hidden bg-primary py-24 text-primary-foreground lg:py-32">
+    <section
+      id="reviews"
+      className="relative overflow-hidden bg-primary py-24 text-primary-foreground lg:py-32"
+    >
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="mx-auto max-w-2xl text-center">
           <motion.p
@@ -73,7 +76,12 @@ export function Reviews() {
 }
 
 const contactItems = [
-  { icon: MapPin, label: "Address", value: "Phase 6, Karachi", href: "https://www.google.com/maps/search/?api=1&query=Phase+6+Karachi" },
+  {
+    icon: MapPin,
+    label: "Address",
+    value: "Phase 6, Karachi",
+    href: "https://www.google.com/maps/search/?api=1&query=Phase+6+Karachi",
+  },
   { icon: Clock, label: "Hours", value: "Mon–Sat · 7:00 – 19:00" },
   { icon: Mail, label: "Email", value: "hello@beanandco.pk", href: "mailto:hello@beanandco.pk" },
 ];

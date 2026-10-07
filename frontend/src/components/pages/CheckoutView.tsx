@@ -16,11 +16,13 @@ import { createOrder } from "@/lib/store/repo";
 import { AnimatedPrice, SectionHeading } from "@/components/coffee/motion-primitives";
 import { Field, TextInput, inputClass } from "@/components/coffee/Field";
 
-
 const schema = z.object({
   fullName: z.string().trim().min(2, "Enter your full name"),
   email: z.string().trim().email("Enter a valid email"),
-  phone: z.string().trim().regex(/^[+\d][\d\s-]{8,}$/, "Enter a valid phone number"),
+  phone: z
+    .string()
+    .trim()
+    .regex(/^[+\d][\d\s-]{8,}$/, "Enter a valid phone number"),
   line1: z.string().trim().min(5, "Enter your street address"),
   city: z.string().trim().min(2, "Enter your city"),
   postalCode: z.string().trim(),
@@ -55,8 +57,15 @@ export function CheckoutView() {
   } = useForm<FormValues>({
     resolver: zodResolver(schema),
     defaultValues: {
-      fullName: "", email: "", phone: "", line1: "", city: "Karachi", postalCode: "", notes: "",
-      deliveryMethod: "standard", paymentMethod: "cod",
+      fullName: "",
+      email: "",
+      phone: "",
+      line1: "",
+      city: "Karachi",
+      postalCode: "",
+      notes: "",
+      deliveryMethod: "standard",
+      paymentMethod: "cod",
     },
   });
 
@@ -74,7 +83,15 @@ export function CheckoutView() {
       const order = await createOrder({
         items: cart.lines.map((l) => ({ productId: l.productId, qty: l.qty, size: l.size })),
         promo: cart.promo,
-        address: { fullName: v.fullName, phone: v.phone, email: v.email, line1: v.line1, city: v.city, postalCode: v.postalCode, notes: v.notes },
+        address: {
+          fullName: v.fullName,
+          phone: v.phone,
+          email: v.email,
+          line1: v.line1,
+          city: v.city,
+          postalCode: v.postalCode,
+          notes: v.notes,
+        },
         paymentMethod: v.paymentMethod,
         deliveryMethod: v.deliveryMethod,
       });
@@ -83,7 +100,9 @@ export function CheckoutView() {
       toast.success(`Order ${order.reference} placed`);
       router.push(`/order-confirmation/${order.id}`);
     } catch (e) {
-      toast.error(e instanceof Error ? e.message : "We couldn't place your order. Please try again.");
+      toast.error(
+        e instanceof Error ? e.message : "We couldn't place your order. Please try again.",
+      );
     }
   };
 
@@ -92,24 +111,51 @@ export function CheckoutView() {
   return (
     <section className="mx-auto max-w-6xl px-4 pb-24 sm:px-6">
       <SectionHeading eyebrow="Almost there" title="Checkout" />
-      <form onSubmit={handleSubmit(onSubmit)} noValidate className="mt-10 grid gap-10 lg:grid-cols-[1.5fr_1fr]">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        noValidate
+        className="mt-10 grid gap-10 lg:grid-cols-[1.5fr_1fr]"
+      >
         <div className="space-y-8">
           <Card title="Contact & address">
             <div className="grid gap-4 sm:grid-cols-2">
               <Field label="Full name" error={errors.fullName?.message}>
-                <TextInput autoComplete="name" aria-invalid={!!errors.fullName} {...register("fullName")} />
+                <TextInput
+                  autoComplete="name"
+                  aria-invalid={!!errors.fullName}
+                  {...register("fullName")}
+                />
               </Field>
               <Field label="Phone" error={errors.phone?.message}>
-                <TextInput type="tel" autoComplete="tel" placeholder="+92 300 1234567" aria-invalid={!!errors.phone} {...register("phone")} />
+                <TextInput
+                  type="tel"
+                  autoComplete="tel"
+                  placeholder="+92 300 1234567"
+                  aria-invalid={!!errors.phone}
+                  {...register("phone")}
+                />
               </Field>
               <Field label="Email" error={errors.email?.message} className="sm:col-span-2">
-                <TextInput type="email" autoComplete="email" aria-invalid={!!errors.email} {...register("email")} />
+                <TextInput
+                  type="email"
+                  autoComplete="email"
+                  aria-invalid={!!errors.email}
+                  {...register("email")}
+                />
               </Field>
               <Field label="Street address" error={errors.line1?.message} className="sm:col-span-2">
-                <TextInput autoComplete="address-line1" aria-invalid={!!errors.line1} {...register("line1")} />
+                <TextInput
+                  autoComplete="address-line1"
+                  aria-invalid={!!errors.line1}
+                  {...register("line1")}
+                />
               </Field>
               <Field label="City" error={errors.city?.message}>
-                <TextInput autoComplete="address-level2" aria-invalid={!!errors.city} {...register("city")} />
+                <TextInput
+                  autoComplete="address-level2"
+                  aria-invalid={!!errors.city}
+                  {...register("city")}
+                />
               </Field>
               <Field label="Postal code (optional)">
                 <TextInput autoComplete="postal-code" {...register("postalCode")} />
@@ -121,12 +167,27 @@ export function CheckoutView() {
           </Card>
 
           <Card title="Delivery">
-            <Choices name="deliveryMethod" options={delivery} register={register} price={(id) => (id === "pickup" ? "Free" : id === "express" ? formatPrice(EXPRESS_FEE) : cart.deliveryFee === 0 ? "Free" : formatPrice(cart.deliveryFee))} />
+            <Choices
+              name="deliveryMethod"
+              options={delivery}
+              register={register}
+              price={(id) =>
+                id === "pickup"
+                  ? "Free"
+                  : id === "express"
+                    ? formatPrice(EXPRESS_FEE)
+                    : cart.deliveryFee === 0
+                      ? "Free"
+                      : formatPrice(cart.deliveryFee)
+              }
+            />
           </Card>
 
           <Card title="Payment">
             <Choices name="paymentMethod" options={payment} register={register} />
-            <p className="mt-3 text-xs text-muted-foreground">Payments are a preview for now — no card is charged.</p>
+            <p className="mt-3 text-xs text-muted-foreground">
+              Payments are a preview for now — no card is charged.
+            </p>
           </Card>
         </div>
 
@@ -136,8 +197,16 @@ export function CheckoutView() {
             {cart.lines.map((l) => (
               <li key={keyOf(l)} className="flex items-center gap-3">
                 <div className="relative">
-                  <img src={l.image} alt="" width={768} height={880} className="size-14 rounded-xl object-cover" />
-                  <span className="absolute -right-1.5 -top-1.5 grid size-5 place-items-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground">{l.qty}</span>
+                  <img
+                    src={l.image}
+                    alt=""
+                    width={768}
+                    height={880}
+                    className="size-14 rounded-xl object-cover"
+                  />
+                  <span className="absolute -right-1.5 -top-1.5 grid size-5 place-items-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground">
+                    {l.qty}
+                  </span>
                 </div>
                 <div className="min-w-0 flex-1">
                   <p className="truncate text-sm font-medium">{l.name}</p>
@@ -148,9 +217,20 @@ export function CheckoutView() {
             ))}
           </ul>
           <dl className="space-y-2 border-t border-border pt-4 text-sm">
-            <div className="flex justify-between"><dt className="text-muted-foreground">Subtotal</dt><dd>{formatPrice(cart.subtotal)}</dd></div>
-            {cart.discount > 0 && <div className="flex justify-between"><dt className="text-muted-foreground">Discount ({cart.promo})</dt><dd>− {formatPrice(cart.discount)}</dd></div>}
-            <div className="flex justify-between"><dt className="text-muted-foreground">Delivery</dt><dd>{fee === 0 ? "Free" : formatPrice(fee)}</dd></div>
+            <div className="flex justify-between">
+              <dt className="text-muted-foreground">Subtotal</dt>
+              <dd>{formatPrice(cart.subtotal)}</dd>
+            </div>
+            {cart.discount > 0 && (
+              <div className="flex justify-between">
+                <dt className="text-muted-foreground">Discount ({cart.promo})</dt>
+                <dd>− {formatPrice(cart.discount)}</dd>
+              </div>
+            )}
+            <div className="flex justify-between">
+              <dt className="text-muted-foreground">Delivery</dt>
+              <dd>{fee === 0 ? "Free" : formatPrice(fee)}</dd>
+            </div>
           </dl>
           <div className="flex items-baseline justify-between border-t border-border pt-4">
             <span className="font-medium">Total</span>
@@ -163,9 +243,20 @@ export function CheckoutView() {
             whileTap={{ scale: 0.97 }}
             className="btn-ember flex w-full items-center justify-center gap-2 rounded-full py-4 text-sm font-semibold disabled:opacity-60"
           >
-            {isSubmitting ? <><Loader2 className="size-4 animate-spin" /> Placing order…</> : "Place order"}
+            {isSubmitting ? (
+              <>
+                <Loader2 className="size-4 animate-spin" /> Placing order…
+              </>
+            ) : (
+              "Place order"
+            )}
           </motion.button>
-          <Link href="/cart" className="block text-center text-sm font-medium text-muted-foreground hover:text-accent">← Back to cart</Link>
+          <Link
+            href="/cart"
+            className="block text-center text-sm font-medium text-muted-foreground hover:text-accent"
+          >
+            ← Back to cart
+          </Link>
         </aside>
       </form>
     </section>
@@ -174,7 +265,12 @@ export function CheckoutView() {
 
 function Card({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} className="rounded-4xl border border-border/60 bg-card p-4 shadow-soft sm:p-6">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      className="rounded-4xl border border-border/60 bg-card p-4 shadow-soft sm:p-6"
+    >
       <h2 className="mb-5 text-2xl">{title}</h2>
       {children}
     </motion.div>
@@ -188,7 +284,12 @@ function Choices<T extends string>({
   price,
 }: {
   name: "deliveryMethod" | "paymentMethod";
-  options: readonly { id: T; label: string; hint: string; icon: React.ComponentType<{ className?: string }> }[];
+  options: readonly {
+    id: T;
+    label: string;
+    hint: string;
+    icon: React.ComponentType<{ className?: string }>;
+  }[];
   register: ReturnType<typeof useForm<FormValues>>["register"];
   price?: (id: T) => string;
 }) {

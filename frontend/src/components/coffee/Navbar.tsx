@@ -65,7 +65,10 @@ export function Navbar() {
         }`}
       >
         <Link href="/#home" className="flex items-center gap-2 font-display text-lg tracking-tight">
-          <motion.span whileHover={{ rotate: -14, scale: 1.1 }} transition={{ type: "spring", stiffness: 350 }}>
+          <motion.span
+            whileHover={{ rotate: -14, scale: 1.1 }}
+            transition={{ type: "spring", stiffness: 350 }}
+          >
             <Coffee className="size-5 text-accent" />
           </motion.span>
           Bean &amp; Co
@@ -94,8 +97,16 @@ export function Navbar() {
           >
             <Search className="size-4" />
           </motion.button>
-          <motion.div whileHover={{ scale: 1.08 }} whileTap={{ scale: 0.92 }} className="hidden sm:block">
-            <Link href="/wishlist" aria-label={`Wishlist, ${wishlist.count} items`} className={iconBtn}>
+          <motion.div
+            whileHover={{ scale: 1.08 }}
+            whileTap={{ scale: 0.92 }}
+            className="hidden sm:block"
+          >
+            <Link
+              href="/wishlist"
+              aria-label={`Wishlist, ${wishlist.count} items`}
+              className={iconBtn}
+            >
               <Heart className="size-4" />
               <Badge n={wishlist.count} />
             </Link>
@@ -133,14 +144,31 @@ export function Navbar() {
           >
             <ul className="p-3">
               {links.map((l, i) => (
-                <motion.li key={l.hash} initial={{ opacity: 0, x: -14 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.05 + i * 0.04 }}>
-                  <Link href={`/#${l.hash}`} onClick={() => setOpen(false)} className="block rounded-2xl px-4 py-3 text-base text-foreground transition-colors hover:bg-secondary">
+                <motion.li
+                  key={l.hash}
+                  initial={{ opacity: 0, x: -14 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.05 + i * 0.04 }}
+                >
+                  <Link
+                    href={`/#${l.hash}`}
+                    onClick={() => setOpen(false)}
+                    className="block rounded-2xl px-4 py-3 text-base text-foreground transition-colors hover:bg-secondary"
+                  >
                     {l.label}
                   </Link>
                 </motion.li>
               ))}
-              <motion.li initial={{ opacity: 0, x: -14 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.4 }}>
-                <Link href="/wishlist" onClick={() => setOpen(false)} className="block rounded-2xl px-4 py-3 text-base hover:bg-secondary">
+              <motion.li
+                initial={{ opacity: 0, x: -14 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.4 }}
+              >
+                <Link
+                  href="/wishlist"
+                  onClick={() => setOpen(false)}
+                  className="block rounded-2xl px-4 py-3 text-base hover:bg-secondary"
+                >
                   Wishlist {wishlist.count > 0 && `(${wishlist.count})`}
                 </Link>
               </motion.li>

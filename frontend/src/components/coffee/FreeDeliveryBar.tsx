@@ -15,7 +15,9 @@ export function FreeDeliveryBar() {
     <div className="rounded-2xl bg-secondary/70 p-3.5">
       <p className="flex items-center gap-2 text-xs font-medium text-foreground">
         <Truck className="size-4 text-accent" />
-        {left === 0 ? "You've unlocked free delivery 🎉" : `Add ${formatPrice(left)} more for free delivery`}
+        {left === 0
+          ? "You've unlocked free delivery 🎉"
+          : `Add ${formatPrice(left)} more for free delivery`}
       </p>
       <div className="mt-2.5 h-1.5 overflow-hidden rounded-full bg-border">
         <motion.div

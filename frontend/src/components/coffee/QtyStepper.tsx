@@ -33,7 +33,10 @@ export function QtyStepper({
       >
         <Minus className="size-3.5" />
       </motion.button>
-      <span className="relative grid h-7 w-7 place-items-center overflow-hidden text-sm font-semibold tabular-nums" aria-live="polite">
+      <span
+        className="relative grid h-7 w-7 place-items-center overflow-hidden text-sm font-semibold tabular-nums"
+        aria-live="polite"
+      >
         <AnimatePresence mode="popLayout" initial={false}>
           <motion.span
             key={value}

@@ -19,8 +19,7 @@ export const reviews = [
   {
     name: "Lena Fischer",
     role: "Designer",
-    quote:
-      "Warm room, quiet music, ridiculous tiramisu. It became my second studio within a week.",
+    quote: "Warm room, quiet music, ridiculous tiramisu. It became my second studio within a week.",
     rating: 5,
   },
 ];
