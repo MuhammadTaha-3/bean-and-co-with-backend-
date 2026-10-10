@@ -17,6 +17,8 @@ cd backend  && npm install && npm run dev      # terminal 1 -> http://localhost:
 cd frontend && npm install && npm run dev      # terminal 2 -> http://localhost:3000
 ```
 
+Running `npm run dev` in `backend` again while its server is already running on port 4000 reports the existing URL instead of failing with `EADDRINUSE`.
+
 Check: http://localhost:4000/api/health must show `"db":"connected"`.
 
 ## Config (already filled in `backend/.env.local`)
