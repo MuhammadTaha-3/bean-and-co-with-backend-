@@ -47,3 +47,8 @@ all functions already `async`). To add a real backend:
    that read from the DB directly, keeping `"use client"` for cart/wishlist/checkout.
 
 Cart and wishlist stay client-side (localStorage) — persist them server-side once auth exists.
+
+
+
+
+......
